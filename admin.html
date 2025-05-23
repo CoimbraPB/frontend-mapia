@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel do Administrador</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <!-- Tela de senha -->
+  <div id="senha-container">
+    <h2>Área Restrita</h2>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button onclick="verificarSenha()">Entrar</button>
+    <p id="mensagem"></p>
+  </div>
+
+  <!-- Painel real -->
+  <main id="painel" class="container" style="display:none;">
+    <h1 class="titulo">Painel do Administrador</h1>
+    <div id="contador" class="contador"></div>
+    <div id="perguntas" class="lista-perguntas">
+      <!-- Exemplo de pergunta com resposta e botão de editar -->
+      <!--
+      <div class="pergunta-card" data-id="1">
+        <strong>Qual é o horário de atendimento?</strong>
+        <div class="resposta-texto">Aqui aparece a resposta</div>
+        <button class="editar-resposta-btn">Editar Resposta</button>
+      </div>
+      -->
+    </div>
+  </main>
+  <script src="script-admin.js"></script>
+</body>
+</html>

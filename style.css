@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #111;
+  font-size: 14.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+.container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 30px 40px;
+  background: #f3f3f3;
+  color: #111;
+  border-radius: 16px;
+  box-shadow:
+    inset 3px 3px 5px #1c1c1c,
+    inset -3px -3px 5px #121212;
+}
+
+.titulo {
+  font-weight: 600;
+  font-size: 2.8rem;
+  color: #111;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-bottom: 42px;
+  user-select: text;
+  text-shadow: none;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+input, textarea, select {
+  background: #fff;
+  color: #11111100;
+  box-shadow:
+    7px 7px 15px #eee,
+    -7px -7px 15px #ccc;
+  border-radius: 14px;
+  border: none;
+  padding: 14px 20px;
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  resize: vertical;
+  font-weight: 300;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+input:focus, textarea:focus, select:focus {
+  background: #f3f3f3;
+  color: #111;
+  box-shadow:
+    inset 3px 3px 7px #ddd,
+    inset -3px -3px 7px #bbb;
+}
+
+button,
+.btn-filtro {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 14px 0;
+  border-radius: 14px;
+  border: 2px solid #bbb;
+  background: #f3f3f3;
+  color: #111;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: none; /* Remove sombra escura */
+  user-select: none;
+}
+
+button:hover,
+.btn-filtro:hover {
+  background: #e0e0e0; /* Cinza mais escuro no hover */
+  color: #111;
+  border-color: #888;
+}
+
+.btn-filtro.ativo {
+  background: #bbb;
+  color: #111;
+  cursor: default;
+  border-color: #888;
+}
+
+.lista-perguntas {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.pergunta-card {
+  background: #fff;
+  color: #111;
+  box-shadow: none;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.pergunta-card:hover {
+  box-shadow:
+    0 4px 18px #bbb; /* sombra clara e suave */
+}
+
+.pergunta-card strong {
+  color: #111;
+  font-weight: 600;
+  font-size: 1.15rem;
+  user-select: text;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.resposta {
+  max-height: 0;
+  overflow: hidden;
+  color: #ccc;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: max-height 0.45s ease;
+  user-select: text;
+}
+
+.pergunta-card.active .resposta {
+  max-height: 300px;
+  margin-top: 12px;
+}
+
+.botoes {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.botoes input[type="text"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: none;
+  background: #1e1e1e;
+  color: #ddd;
+  box-shadow:
+    7px 7px 15px #121212,
+    -7px -7px 15px #2a2a2a;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.botoes button {
+  padding: 12px 18px;
+  min-width: 100px;
+  font-size: 1rem;
+}
+
+.contador {
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #ff3c3c;
+  margin-bottom: 36px;
+  user-select: none;
+}
+
+.faq-marcado {
+  background: #297b2922;
+  border-left: 6px solid #297b29;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #171717;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+select {
+  appearance: none; /* remove seta padrão */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  color: #888;
+  padding: 10px 40px 10px 10px; /* espaço pra seta */
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23ff3333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+  cursor: pointer;
+}
+
+/* Remove o foco com outline padrão, deixa um glow vermelho */
+select:focus {
+  outline: none;
+  box-shadow: 0 0 8px #ff3333;
+}
+.notificacao-box {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #111;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #bbb;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  font-weight: 600;
+  user-select: none;
+  z-index: 9999;
+}
+
+.notificacao-box.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.filtros {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  justify-content: center;
+}
+
+.btn-filtro {
+  background: transparent;
+  border: 2px solid #888;
+  color: #111;
+  padding: 8px 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-filtro:hover {
+  background: #111;
+  color: #fff;
+}
+
+.btn-filtro.ativo {
+  background: #111;
+  color: #fff;
+  cursor: default;
+}
+.logo-fixa {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 100px; /* ajuste conforme necessário */
+  height: auto;
+  z-index: 10000;
+  transition: transform 0.3s ease;
+  opacity: 0.95;
+}
+
+.logo-fixa:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.faq-question {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #111;
+  border: 2px solid #bbb;
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  box-shadow:
+    7px 7px 15px #888,
+    -7px -7px 15px #888;
+  transition: all 0.35s ease;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.faq-question:hover,
+.faq-question.active {
+  background: #bbb;
+  color: #111;
+  border-color: #111;
+}
+
+.faq-answer {
+  display: none;
+  padding: 12px 16px;
+  background-color: #f3f3f3;
+  color: #111;
+  box-shadow:
+    inset 4px 4px 7px #eee,
+    inset -4px -4px 7px #ccc;
+  border-radius: 12px;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.faq-answer p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
