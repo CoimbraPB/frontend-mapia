@@ -1,3 +1,5 @@
+const baseURL = 'https://backend-mapia.onrender.com'; // Substitua pela URL real do seu backend
+
 // Função para mostrar a notificação com fade-in e fade-out
 function mostrarNotificacao(mensagem, tempo = 3000) {
   const notif = document.getElementById('notificacao');
@@ -22,7 +24,7 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch('/perguntas', {
+    const res = await fetch(`${baseURL}/perguntas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, departamento, pergunta }),
@@ -46,7 +48,7 @@ let faqsCache = [];
 async function carregarPerguntas() {
   const container = document.getElementById('perguntas');
   container.innerHTML = '';
-  const res = await fetch('/perguntas');
+  const res = await fetch(`${baseURL}/perguntas`);
   perguntasCache = await res.json();
   renderizarPerguntasFiltradas('Todos');
 }
@@ -54,7 +56,7 @@ async function carregarPerguntas() {
 async function carregarFAQ() {
   const container = document.getElementById('faq');
   container.innerHTML = '';
-  const res = await fetch('/faq');
+  const res = await fetch(`${baseURL}/faq`);
   faqsCache = await res.json();
   renderizarFaqsFiltradas('Todos');
 }
@@ -66,7 +68,6 @@ function criarBotaoPergunta(p) {
   const botao = document.createElement('button');
   botao.type = 'button';
   botao.className = 'faq-question';
-  // Texto do botão atualizado
   botao.textContent = `Nome: ${p.nome} — Pergunta: ${p.pergunta || 'Sem pergunta'}`;
 
   const resposta = document.createElement('div');
@@ -79,13 +80,8 @@ function criarBotaoPergunta(p) {
 
   botao.addEventListener('click', () => {
     const isAtivo = resposta.style.display === 'block';
-    if (isAtivo) {
-      resposta.style.display = 'none';
-      botao.classList.remove('active');
-    } else {
-      resposta.style.display = 'block';
-      botao.classList.add('active');
-    }
+    resposta.style.display = isAtivo ? 'none' : 'block';
+    botao.classList.toggle('active', !isAtivo);
   });
 
   wrapper.appendChild(botao);
@@ -120,27 +116,21 @@ function renderizarFaqsFiltradas(filtro) {
   });
 }
 
-// Função para configurar os botões filtro
 function configurarFiltros() {
   const botoes = document.querySelectorAll('#filtros-departamento .btn-filtro');
 
   botoes.forEach(botao => {
     botao.addEventListener('click', () => {
-      // Remove classe ativo de todos
       botoes.forEach(b => b.classList.remove('ativo'));
-
-      // Adiciona na clicada
       botao.classList.add('ativo');
 
       const filtro = botao.getAttribute('data-dep');
-
       renderizarPerguntasFiltradas(filtro);
-      renderizarFaqsFiltradas('Todos'); // FAQ sempre mostra tudo (pode mudar se quiser)
+      renderizarFaqsFiltradas('Todos');
     });
   });
 }
 
-// Inicializa tudo quando a página carregar
 window.addEventListener('DOMContentLoaded', () => {
   carregarPerguntas();
   carregarFAQ();

@@ -1,7 +1,9 @@
+const API_URL = 'https://backend-mapia.onrender.com'; // ⬅️ Substitua pela URL do seu backend
+
 async function carregarPerguntas() {
   const container = document.getElementById('perguntas');
   container.innerHTML = '';
-  const res = await fetch('/perguntas');
+  const res = await fetch(`${API_URL}/perguntas`);
   const perguntas = await res.json();
 
   const pendentes = perguntas.filter(p => !p.resposta);
@@ -48,7 +50,6 @@ function editarResposta(id) {
   const respostaDiv = document.getElementById(`resposta-texto-${id}`);
   const textoAtual = respostaDiv.querySelector('span').textContent;
 
-  // Substituir o texto da resposta por input e botões salvar/cancelar
   respostaDiv.innerHTML = `
     <input type="text" id="input-editar-${id}" value="${textoAtual}" />
     <button onclick="salvarRespostaEditada(${id})">Salvar</button>
@@ -57,7 +58,7 @@ function editarResposta(id) {
 }
 
 function verificarSenha() {
-  const senhaCorreta = "adm123"; // Altere aqui se quiser
+  const senhaCorreta = "adm123";
   const senhaDigitada = document.getElementById("senha").value;
   const mensagem = document.getElementById("mensagem");
 
@@ -78,7 +79,7 @@ async function salvarRespostaEditada(id) {
     return;
   }
 
-  const res = await fetch(`/perguntas/${id}/responder`, {
+  const res = await fetch(`${API_URL}/perguntas/${id}/responder`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ resposta: novaResposta }),
@@ -102,7 +103,7 @@ async function responder(id) {
     return;
   }
 
-  const res = await fetch(`/perguntas/${id}/responder`, {
+  const res = await fetch(`${API_URL}/perguntas/${id}/responder`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ resposta }),
@@ -114,7 +115,7 @@ async function responder(id) {
 }
 
 async function apagar(id) {
-  const res = await fetch(`/perguntas/${id}`, {
+  const res = await fetch(`${API_URL}/perguntas/${id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({}),
@@ -126,7 +127,7 @@ async function apagar(id) {
 }
 
 async function marcarFAQ(id) {
-  const res = await fetch(`/perguntas/${id}/faq`, {
+  const res = await fetch(`${API_URL}/perguntas/${id}/faq`, {
     method: 'POST',
   });
 
